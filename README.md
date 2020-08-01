@@ -1,4 +1,4 @@
-# webpack-weather
+# Adam
 
 ## Project setup
 ```

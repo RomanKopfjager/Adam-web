@@ -1,0 +1,12 @@
+.main__products{
+  display: flex;
+}
+.main__products__item{
+  text-align: center;
+  flex: 0 1 200px;
+}
+.item__image{
+  img{
+    width: 100%;
+  }
+}

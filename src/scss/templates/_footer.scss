@@ -1,0 +1,43 @@
+.footer{
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  padding: 10px 30px;
+  width: 100%;
+  .footer__search{
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 0;
+    font-weight: 700;
+    margin-left: calc(310px + 4.68vw);
+    border-top: 1px solid $color-black;
+  }
+  .form_search{
+    display: flex;
+    align-items: center;
+    input{
+      padding: 5px;
+    }
+    .form__input{
+      padding-right: 5px;
+      input{
+        width: calc(100px + 30vw);
+        color: $color-white;
+        background-color: $color-grey;
+        &::placeholder{
+          color: $color-grey-dark;
+        }
+      }
+    }
+    .form__submit{
+      input{
+        color: $color-grey-dark;
+        padding: 5px 20px;
+        background-color: $color-grey;
+      }
+    }
+  }
+}
