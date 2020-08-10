@@ -1,8 +1,9 @@
-.main__categories__list{
+.main__categories__list {
   width: 300px;
   user-select: none;
-  .categories__list__item{
-    .text{
+
+  .categories__list__item {
+    .text {
       position: relative;
       z-index: 1;
       display: block;
@@ -13,23 +14,31 @@
       cursor: pointer;
       background-color: $color-grey-lighter;
       transition: background-color .3s ease;
-      &:hover{
+
+      &:hover {
         background-color: $color-grey-light;
       }
     }
   }
-  .categories__list__item__has_sub{
+
+  .categories__list__item__has_sub {
     position: relative;
     z-index: 1;
-    &.active{
-      .text{
-        &:before{
+
+    .text {
+      &.active_color{
+        background-color: $color-grey-light;
+      }
+      &.active {
+
+        &:before {
           transform: rotate(135deg);
         }
       }
     }
-    .text{
-      &:before{
+
+    .text {
+      &:before {
         content: '';
         position: absolute;
         z-index: 1;
@@ -44,16 +53,19 @@
       }
     }
   }
-  .sub__menu{
+
+  .sub__menu {
     display: none;
     margin-left: 20px;
-    .text{
-      &:before{
+
+    .text {
+      &:before {
         content: none;
       }
     }
   }
-  .main__content{
+
+  .main__content {
     flex: 1 1;
     display: flex;
     flex-direction: column;

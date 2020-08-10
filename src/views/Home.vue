@@ -70,7 +70,7 @@
         //if you want to send any data into server before redirection then you can do it here
 
         if (this.login && this.password && this.login == 'debug' && this.password == '1234') {
-          this.$router.push('/home');
+          this.$router.push('/product');
         }
 
         this.errors = [];

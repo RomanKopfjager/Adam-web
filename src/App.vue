@@ -1,24 +1,17 @@
 <template>
-	<router-view>
-
-	</router-view>
+  <transition name="fade" mode="out-in">
+    <router-view/>
+  </transition>
 </template>
 
 <script>
-	// import axios from 'axios';
 
-	export default {
-		props: {
-			source: String,
-		},
-		data: () => ({
+  export default {
 
-		}),
-		methods: {
+    data: () => ({}),
+    methods: {},
+    mounted() {
 
-		},
-		mounted() {
-
-		}
-	}
+    }
+  }
 </script>

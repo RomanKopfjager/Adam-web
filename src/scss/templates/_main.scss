@@ -7,13 +7,35 @@
 body{
   font-family: $openSans;
 }
+.page_wrapper{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 .main{
   width: 100%;
-  min-height: 100vh;
+  flex: 1 1;
   padding: 10px 30px;
 }
 .main__wrapper{
   display: flex;
+  padding: 40px 40px 0 60px;
+}
+.main__aside{
+  display: flex;
   align-items: center;
-  padding: 0 40px;
+}
+.main__content{
+  flex: 1 1;
+  overflow: hidden;
+  padding-left: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+}
+.main__cart{
+  flex: 1 1;
 }
