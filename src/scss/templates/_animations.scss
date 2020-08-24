@@ -3,8 +3,14 @@
   opacity: 0;
   transform: translateX(1vw);
 }
-
 .fade-enter-active,
 .fade-leave-active{
   transition: all .3s ease;
+}
+.toggle-enter{
+  opacity: 0;
+}
+
+.toggle-enter-active{
+  transition: all .5s ease;
 }

@@ -72,4 +72,10 @@ export default {
     }
   },
 
+  scrollHorizontally (e) {
+    e = window.event || e;
+    var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    document.querySelector('.main__products__wrapper').scrollLeft -= (delta * 40); // Multiplied by 40
+    e.preventDefault();
+  }
 }

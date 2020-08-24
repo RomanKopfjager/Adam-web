@@ -1,0 +1,35 @@
+.main__cart{
+  display: flex;
+  .main__products__wrapper {
+    width: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column;
+  }
+  .products__item{
+    width: 100px;
+    min-width: 150px;
+    min-height: 200px;
+  }
+  .item__image {
+    img{
+      height: 100px;
+      object-fit: contain;
+    }
+  }
+  .item__buttons {
+    .product__add_to_cart,
+    .product_info{
+      padding: 2px 10px;
+      font-size: 18px;
+    }
+  }
+  .product_qty {
+    label{
+      padding: 3px;
+    }
+    input{
+      padding: 2px 10px;
+    }
+  }
+}

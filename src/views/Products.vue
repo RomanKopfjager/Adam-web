@@ -85,6 +85,8 @@
   import logo from '@/assets/img/logo_black.png';
   import Animations from '@/animations/Animations.js';
 
+  import axios from 'axios';
+
   export default {
     name: 'Products',
     data: () => ({
@@ -164,7 +166,27 @@
       },
       showButtons(item) {
         this.productDescription = item.name
-      }
+      },
+
+      getProduct(id) {
+        let params = new URLSearchParams();
+        params.append("token", "6b4a0ddb57e5e45797bff05bb1d09b1f");
+        params.append("category_id", id);
+        params.append("mode", 0);
+        params.append("archive", 0);
+        this.newProds = [];
+        axios.post('http://localhost:8080/3.00/commercial_items_list.php', params)
+          .then(response => {
+            let products = response.data.response;
+            console.log(products)
+            products.forEach((product) => {
+              this.newProds.push(product);
+            })
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
     },
     mounted() {
 

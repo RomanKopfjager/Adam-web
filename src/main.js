@@ -6,23 +6,24 @@ import store from './store';
 import axios from 'axios';
 import cors from 'cors';
 import VueAxios from 'vue-axios';
-import VueGeolocation from 'vue-browser-geolocation';
 import style from './scss/index.scss';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faKey} from '@fortawesome/free-solid-svg-icons';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+import TransitionDropdown from './components/general/TransitionDropdown';
 
 library.add(faKey, faUser);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
+//Custom components
+Vue.component('app-transition-dropdown', TransitionDropdown);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 Vue.use(
-  VueGeolocation,
   style,
-  cors
+  cors,
 );
 
 new Vue({
@@ -31,6 +32,5 @@ new Vue({
   store,
   VueAxios,
   axios,
-  VueGeolocation,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
