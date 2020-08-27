@@ -7,9 +7,31 @@
     grid-auto-flow: column;
   }
   .products__item{
+    position: relative;
+    z-index: 1;
     width: 100px;
     min-width: 150px;
-    min-height: 200px;
+    min-height: 180px;
+    padding: 0 10px;
+    margin: 10px 10px 10px 0;
+    &:nth-child(odd){
+      &:before{
+        content: '';
+        position: absolute;
+        z-index: 1;
+        left: -60px;
+        bottom: -10px;
+        width: calc(100% + 60px);
+        height: 1px;
+        background-color: $color-black;
+      }
+    }
+    &:first-child{
+      &:before {
+        left: 30px;
+        width: calc(100% - 60px);
+      }
+    }
   }
   .item__image {
     img{

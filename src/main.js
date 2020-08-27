@@ -1,17 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-import vuetify from './plugins/vuetify';
 import router from './router';
 import store from './store';
-import axios from 'axios';
-import cors from 'cors';
-import VueAxios from 'vue-axios';
+import api from './services/api';
 import style from './scss/index.scss';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faKey} from '@fortawesome/free-solid-svg-icons';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+
 import TransitionDropdown from './components/general/TransitionDropdown';
 
 library.add(faKey, faUser);
@@ -20,17 +18,46 @@ library.add(faKey, faUser);
 Vue.component('app-transition-dropdown', TransitionDropdown);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-Vue.config.productionTip = false;
+let handleClickOutside;
+
+Vue.directive('click-outside', {
+	bind (el, binding, vnode) {
+		handleClickOutside = (e) => {
+			e.stopPropagation()
+			const { handler, exclude } = binding.value
+			let clickedOnExcludedEl = false
+
+// Gives you the ability to exclude certain elements if you want, pass as array of strings to exclude
+			if (exclude) {
+				exclude.forEach(refName => {
+					if (!clickedOnExcludedEl) {
+						const excludedEl = vnode.context.$refs[refName]
+						clickedOnExcludedEl = excludedEl.contains(e.target)
+					}
+				})
+			}
+
+			if (!el.contains(e.target) && !clickedOnExcludedEl) {
+				handler(e)
+			}
+		}
+		document.addEventListener('click', handleClickOutside)
+		document.addEventListener('touchstart', handleClickOutside)
+	},
+
+	unbind () {
+		document.removeEventListener('click', handleClickOutside)
+		document.removeEventListener('touchstart', handleClickOutside)
+	}
+})
+
 Vue.use(
-  style,
-  cors,
+		style,
 );
 
 new Vue({
-  vuetify,
-  router,
-  store,
-  VueAxios,
-  axios,
-  render: h => h(App)
+	router,
+	store,
+	api,
+	render: h => h(App)
 }).$mount('#app');
