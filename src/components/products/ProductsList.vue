@@ -1,75 +1,69 @@
 <template>
-  <!--  <div class="main__products__wrapper">-->
-<!--  <transition-group-->
-<!--      name="fade"-->
-<!--      mode="out-in"-->
-<!--      class="main__products__wrapper"-->
-<!--      tag="div"-->
-<!--  >-->
-    <Skeleton>
-<!--    <app-product-item-->
-<!--        v-for="(item, index) in productsList"-->
-<!--        :item="item"-->
-<!--        :key="index"/>-->
-
-      <div class="products__item"
-           v-for="(item, index) in productsList"
-           :key="index"
-           @click="toggleProduct(item)"
-           :class="{ 'active active_color' : toggleProductItem === item.id }">
-        <div class="products__item__wrapper">
-          <div class="item__name">
-            <p>{{ item.article }}</p>
-          </div>
-          <div class="item__image">
-            <transition name="fade">
-              <img :src="item.image" alt="INDPC">
-            </transition>
-          </div>
-          <div class="item__price">
-            <span class="currency">&#8364;</span>
-            <span class="value">{{ item.price }}</span>
-          </div>
-          <div class="item__buttons">
-            <button class="product__add_to_cart" @click="addToCart(item)">Add to cart</button>
-            <router-link class="product_info" :to="`/product/${item.id}`">Show Info</router-link>
-            <div class="product_qty">
-              <label>-</label>
-              <input type="number" value="1">
-              <label>+</label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Skeleton>
-<!--  </transition-group>-->
-  <!--  </div>-->
+  <transition-group
+      v-click-outside="closeEvent"
+      name="fade"
+      mode="out-in"
+      class="main__products__wrapper main__products__wrapper__list"
+      tag="div">
+    <app-product-item
+        v-for="(item, index) in productsList"
+        :item="item"
+        :key="index"/>
+  </transition-group>
 </template>
 
 <script>
-import {mapActions} from 'vuex';
-import {mapGetters} from 'vuex';
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
-// import ProductItem from '@/components/products/ProductItem';
+import ProductItem from '@/components/products/ProductItem';
 
 export default {
   name: 'ProductsList',
-  data: () => ({
-    toggleProductItem: 0,
-    loadingData: false,
-    animating: false
-  }),
+  data: () => ({}),
   components: {
-    // appProductItem: ProductItem
+    appProductItem: ProductItem
   },
   computed: {
-    ...mapActions({
-      getProducts: 'getProductsByCategoryId'
-    }),
     ...mapGetters({
       productsList: 'productsList'
     }),
+    ...mapActions({
+      getProducts: 'getProductsByCategoryId'
+    }),
   },
-  methods: {}
+  methods: {
+    ...mapMutations({
+      toggleActiveProduct: 'ACTIVE_PRODUCT',
+    }),
+    closeEvent() {
+      this.toggleActiveProduct({
+        id: null,
+        description: ''
+      })
+    },
+  },
+  mounted() {
+
+    let element = document.querySelector('.main__products__wrapper__list');
+
+    if (element.addEventListener) {
+      // IE9, Chrome, Safari, Opera
+      element.addEventListener("mousewheel", scrollHorizontally, false);
+      // Firefox
+      element.addEventListener("DOMMouseScroll", scrollHorizontally, false);
+    } else {
+      // IE 6/7/8
+      element.attachEvent("onmousewheel", scrollHorizontally);
+    }
+
+    function scrollHorizontally(e) {
+      console.log(e)
+      e = window.event || e;
+      let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+      element.scrollLeft -= (delta * 40); // Multiplied by 40
+      e.preventDefault();
+    }
+
+  }
 }
 </script>

@@ -44,7 +44,6 @@ export default {
     }),
     ...mapGetters({
       categoriesList: 'categoriesList',
-      categoryStatus: 'categoryStatus'
     }),
   },
   created() {
@@ -52,15 +51,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      getProducts: 'getProductsByCategoryId'
+      getProductsByCategoryId: 'getProductsByCategoryId'
     }),
-    async toggleCategory(id) {
+    toggleCategory(id) {
       if (this.toggleCategoryItem === id) {
         this.toggleCategoryItem = null;
       } else {
         this.toggleCategoryItem = id;
-        await this.getProducts(id);
-        console.log(this.categoryStatus)
+        this.getProductsByCategoryId(id);
       }
     },
     toggleSubCategory(id) {
@@ -68,8 +66,7 @@ export default {
         this.toggleSubCategoryItem = null;
       } else {
         this.toggleSubCategoryItem = id;
-        this.getProducts(id);
-        console.log(this.categoryStatus)
+        this.getProductsByCategoryId(id);
       }
     },
   }
